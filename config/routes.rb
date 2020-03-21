@@ -8,6 +8,7 @@ Rails.application.routes.draw do
           get '/input_types', to: 'input_type#index'
           get '/group_types/:kind', to: 'group_type#show'
           get '/input_types/:kind', to: 'input_type#show'
+          get '/devices/:id', to: 'device#show'
           get '/nodes', to: 'node#index'
         end
       end

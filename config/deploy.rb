@@ -1,9 +1,9 @@
 require 'mina/rails'
 require 'mina/git'
 require 'mina/rbenv'
-require 'mina_sidekiq/tasks'
-require 'mina/whenever'
-require 'mina/delayed_job'
+# require 'mina_sidekiq/tasks'
+# require 'mina/whenever'
+# require 'mina/delayed_job'
 
 
 set :application_name, 'eio'
@@ -60,13 +60,13 @@ task :deploy do
     invoke :'deploy:link_shared_paths'
     invoke :'bundle:install'
     invoke :'rails:db_migrate'
-    invoke :'rails:assets_precompile'
+    # invoke :'rails:assets_precompile'
     invoke :'deploy:cleanup'
     on :launch do
       in_path(fetch(:current_path)) do
         invoke :'rbenv:load'
         # invoke :'delayed_job:restart'
-        command %(RAILS_ENV=#{fetch(:rails_env)} bundle exec pumactl -F config/puma.rb stop)
+        # command %(RAILS_ENV=#{fetch(:rails_env)} bundle exec pumactl -F config/puma.rb stop)
         command %(RAILS_ENV=#{fetch(:rails_env)} bundle exec pumactl -F config/puma.rb start)
       end
     end
