@@ -1,0 +1,3 @@
+class NodeBaseSerializer < BaseSerializer
+  
+end
