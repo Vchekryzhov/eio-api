@@ -66,8 +66,8 @@ task :deploy do
       in_path(fetch(:current_path)) do
         invoke :'rbenv:load'
         # invoke :'delayed_job:restart'
-        # command %(RAILS_ENV=#{fetch(:rails_env)} bundle exec pumactl -F config/puma.rb stop)
-        command %(RAILS_ENV=production bundle exec pumactl -F config/puma.rb start)
+        command %(RAILS_ENV=#{fetch(:rails_env)} bundle exec pumactl -F config/puma.rb stop)
+        command %(RAILS_ENV=#{fetch(:rails_env)} bundle exec pumactl -F config/puma.rb start)
       end
     end
   end
