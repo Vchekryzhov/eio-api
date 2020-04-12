@@ -2,8 +2,7 @@ class Api::V2::RequestController < ApiController
 before_action :accept_all_params
 
   def create
-    logger.info(params)
-    Request.create(request: params)
+    Request.create(request: params[:datum])
     render json: {}, status: 200
   end
 
