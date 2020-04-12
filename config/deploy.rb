@@ -1,6 +1,7 @@
 require 'mina/rails'
 require 'mina/git'
 require 'mina/rbenv'
+
 # require 'mina_sidekiq/tasks'
 # require 'mina/whenever'
 # require 'mina/delayed_job'
@@ -14,7 +15,7 @@ set :repository, 'git@github.com:Vchekryzhov/eio-api.git'
 set :branch, 'master'
 set :rails_env, 'production'
 set :port, 2848
-
+set :yarn_options, 'production'
 task :remote_environment do
   invoke :'rbenv:load'
 end
@@ -65,7 +66,6 @@ task :deploy do
     on :launch do
       in_path(fetch(:current_path)) do
         invoke :'rbenv:load'
-        # invoke :'delayed_job:restart'
         command %(RAILS_ENV=#{fetch(:rails_env)} bundle exec pumactl -F config/puma.rb stop)
         command %(RAILS_ENV=#{fetch(:rails_env)} bundle exec pumactl -F config/puma.rb start)
       end

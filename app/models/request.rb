@@ -6,7 +6,7 @@ class Request < ApplicationRecord
         Input.create(
           device_id: i['device_id'],
           input_type: i['input_type'],
-          group_type: i['group_type'],
+          group_id: i['group_id'],
           value: i['value'] || i['values'],
           client_time: created_at,
           name: i['name'],
