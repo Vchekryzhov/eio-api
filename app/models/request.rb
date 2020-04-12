@@ -8,7 +8,7 @@ class Request < ApplicationRecord
           input_type: i['input_type'],
           group_id: i['group_id'],
           value: i['value'] || i['values'],
-          client_time: created_at,
+          client_time: i['timestamp'],
           name: i['name'],
           request_id: id
         )
