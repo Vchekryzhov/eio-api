@@ -1,5 +1,5 @@
 class Group < ApplicationRecord
-  belongs_to :group_type, primary_key: :kind, foreign_key: :group_type
+  belongs_to :group_type, primary_key: :kind, foreign_key: :group_type, optional: true
   def group_type=(v)
     super(GroupType.find_by_kind(v))
   end
