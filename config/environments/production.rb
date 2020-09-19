@@ -88,7 +88,7 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
-    config.action_controller.default_url_options = { host: 'cnc.kovalev.team', port: 80 }
+    config.action_controller.default_url_options = { host: 'cnc-api.kovalev.team', port: 80 }
 
 
   # Inserts middleware to perform automatic connection switching.
