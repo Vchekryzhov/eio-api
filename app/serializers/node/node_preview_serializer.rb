@@ -1,3 +1,3 @@
 class Node::NodePreviewSerializer < NodeBaseSerializer
-  attributes :title, :image, :preview_description
+  attributes :id, :title, :image, :preview_description
 end
