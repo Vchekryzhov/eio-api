@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_21_215329) do
+ActiveRecord::Schema.define(version: 2020_09_21_230222) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,10 +62,10 @@ ActiveRecord::Schema.define(version: 2020_03_21_215329) do
   create_table "groups", force: :cascade do |t|
     t.string "title"
     t.bigint "parent_id"
-    t.string "group_type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["group_type"], name: "index_groups_on_group_type"
+    t.bigint "group_type_id"
+    t.index ["group_type_id"], name: "index_groups_on_group_type_id"
     t.index ["parent_id"], name: "index_groups_on_parent_id"
   end
 
@@ -91,8 +91,11 @@ ActiveRecord::Schema.define(version: 2020_03_21_215329) do
     t.datetime "updated_at", null: false
     t.string "input_type"
     t.bigint "group_id"
+    t.string "unit"
+    t.bigint "input_type_id"
     t.index ["device_id"], name: "index_inputs_on_device_id"
     t.index ["group_id"], name: "index_inputs_on_group_id"
+    t.index ["input_type_id"], name: "index_inputs_on_input_type_id"
     t.index ["request_id"], name: "index_inputs_on_request_id"
   end
 

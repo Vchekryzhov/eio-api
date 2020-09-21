@@ -2,7 +2,7 @@ class Api::V2::RequestController < ApiController
 before_action :accept_all_params
 
   def create
-    Request.create(request: params[:request])
+    Request.create!(request: params[:request])
     render json: {}, status: 200
   end
 
