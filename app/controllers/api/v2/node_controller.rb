@@ -8,7 +8,7 @@ class Api::V2::NodeController < ApiController
   end
 
   def show
-    render json: Node::NodeDetailSerializer.new(Node.find(params[:kind]))
+    render json: Node::NodeDetailSerializer.new(Node.find(params[:id]))
   end
 
 end
