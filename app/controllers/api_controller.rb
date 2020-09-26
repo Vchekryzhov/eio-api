@@ -11,11 +11,7 @@ class ApiController <  ActionController::API
     render(json: { error: exception.message, backtrace: exception.backtrace }, status: :bad_request)
   end
 
-  rescue_from ActionController::BadRequest do |exception|
-    render(json: { error: exception.message, backtrace: exception.backtrace }, status: :bad_request)
-  end
-
-  rescue_from ActiveRecord::RecordInvalid do |exception|
+  rescue_from ActiveRecord::RecordInvalid do |exception, message|
     render(json: { error: exception.message, backtrace: exception.backtrace }, status: :bad_request)
   end
 end
