@@ -1,3 +1,3 @@
 class InputTypeSerializer < ActiveModel::Serializer
-  attributes :title, :kind
+  attributes :title, :kind, :description
 end
