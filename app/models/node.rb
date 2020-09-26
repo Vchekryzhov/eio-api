@@ -3,6 +3,7 @@ class Node < ApplicationRecord
 
     has_many :node2depart
     has_many :departments, through: :node2depart, source: :department
+    has_many :devices
 
     def last_online
       Time.parse(Redis.new(db: 1).get(id)) if Redis.new(db: 1).get(id)

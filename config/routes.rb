@@ -10,6 +10,7 @@ Rails.application.routes.draw do
           get '/input_types/:kind', to: 'input_type#show'
           get '/devices/:id', to: 'device#show'
           get '/nodes', to: 'node#index'
+          get '/nodes/:id', to: 'node#show'
           post '/requests', to: 'request#create'
         end
       end

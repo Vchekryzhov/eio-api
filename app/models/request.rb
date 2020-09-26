@@ -3,9 +3,9 @@ class Request < ApplicationRecord
   after_create :create_inputs
   def create_inputs
     request["inputs"].map do |i|
-        Input.create(
-          device_id: i['device_id'],
-          input_type: i['input_type'],
+        Input.create!(
+          device_id: request['device_id'],
+          input_type: i['name'],
           group_id: i['group_id'],
           value: i['value'] || i['values'],
           client_time: i['timestamp'],
