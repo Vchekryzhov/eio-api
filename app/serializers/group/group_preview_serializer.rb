@@ -1,3 +1,3 @@
 class Group::GroupPreviewSerializer < GroupBaseSerializer
-  attributes :id, :parent_id, :group_type_id, :device_id
+  attributes :id, :title, :parent_id, :group_type_id, :device_id
 end
