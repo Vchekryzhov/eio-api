@@ -9,6 +9,7 @@ Rails.application.routes.draw do
           get '/group_types/:kind', to: 'group_type#show'
           get '/input_types/:kind', to: 'input_type#show'
           get '/devices/:id', to: 'device#show'
+          get '/groups', to: 'group#index'
           get '/nodes', to: 'node#index'
           get '/nodes/:id', to: 'node#show'
           post '/requests', to: 'request#create'
