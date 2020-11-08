@@ -1,4 +1,4 @@
-class DocumentUploader < CarrierWave::Uploader::Base
+class DocumentUploader < BaseUploader
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
   # include CarrierWave::MiniMagick

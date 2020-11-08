@@ -1,19 +1,10 @@
 Rails.application.configure do
-  # Settings specified here will take precedence over those in config/application.rb.
-
-  # In the development environment your application's code is reloaded on
-  # every request. This slows down response time but is perfect for development
-  # since you don't have to restart the web server when you make code changes.
   config.cache_classes = false
 
-  # Do not eager load code on boot.
   config.eager_load = false
 
-  # Show full error reports.
   config.consider_all_requests_local = true
 
-  # Enable/disable caching. By default caching is disabled.
-  # Run rails dev:cache to toggle caching.
   if Rails.root.join('tmp', 'caching-dev.txt').exist?
     config.action_controller.perform_caching = true
     config.action_controller.enable_fragment_cache_logging = true
@@ -28,35 +19,26 @@ Rails.application.configure do
     config.cache_store = :null_store
   end
 
-  # Store uploaded files on the local file system (see config/storage.yml for options).
   config.active_storage.service = :local
 
-  # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
 
   config.action_mailer.perform_caching = false
 
-  # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 
-  # Raise an error on page load if there are pending migrations.
   config.active_record.migration_error = :page_load
 
-  # Highlight code that triggered database queries in logs.
   config.active_record.verbose_query_logs = true
 
-  # Debug mode disables concatenation and preprocessing of assets.
-  # This option may cause significant delays in view rendering with a large
-  # number of complex assets.
   config.assets.debug = true
 
-  # Suppress logger output for asset requests.
   config.assets.quiet = true
 
-  # Raises error for missing translations.
-  # config.action_view.raise_on_missing_translations = true
-
-  # Use an evented file watcher to asynchronously detect changes in source code,
-  # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+
+  ENV['ASSET_HOST'] = 'http://localhost:3001'
+  config.asset_host = ENV['ASSET_HOST']
+  ENV['IMGPROXY_KEY'] = '352e227e24a7544fd1707f68151d695e767f5c7a6e15194981f2158496e471103558b67b0d657b9df2e5b57821a0d1f3a0dd65bdc3cfc4dfc4746d69aa6fc2c4'
+  ENV['IMGPROXY_SALT'] = '0dc02ce9c4095b4bd4d756c3f5554189c6a4c5e05e84338a5841703f7f5d946529157aba76504ea908dd5532bd4532138e57f063a7af124408f616e5c2a6268c'
 end

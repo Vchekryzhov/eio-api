@@ -1,11 +1,12 @@
-class MachinePhotoUploader < CarrierWave::Uploader::Base
+class MachinePhotoUploader < BaseUploader
+  include CarrierWave::MiniMagick
 
   storage :file
+  version :regular do
+    process resize_to_limit: [200, 200]
+  end
 
   def store_dir
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
-  end
-  def url
-    "https://cnc-api.kovalev.team" + super
   end
 end

@@ -5,6 +5,12 @@ class Node < ApplicationRecord
     has_many :departments, through: :node2depart, source: :department
     has_many :devices
 
+    after_commit :set_image_color
+
+    def set_image_color
+      image.present? ? image.regular.set_color : nil
+    end
+
     def last_online
       Time.parse(Redis.new(db: 1).get(id)) if Redis.new(db: 1).get(id)
     end
