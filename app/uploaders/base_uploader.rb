@@ -45,7 +45,7 @@ class BaseUploader < CarrierWave::Uploader::Base
     digest = OpenSSL::Digest.new("sha256")
 
     hmac = Base64.urlsafe_encode64(OpenSSL::HMAC.digest(digest, key, "#{salt}/#{proxy_path}")).tr("=", "")
-    "#{Rails.application.config.asset_host}/images/#{hmac}/#{proxy_path}"
+    "#{ENV['IMG_PROXY_HOST']}/#{hmac}/#{proxy_path}"
   end
 
 end
