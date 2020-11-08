@@ -30,8 +30,8 @@ class BaseUploader < CarrierWave::Uploader::Base
     encoded_url = Base64.urlsafe_encode64(url).tr("=", "").scan(/.{1,16}/).join("/")
 
     resize_type = params[:resize_type] || "auto"
-    width = params[:width] || 300
-    height = params[:height]
+    width = params[:width] || 0
+    height = params[:height] || 0
     # gravity = params[:gravity] || "no"
     enlarge = params[:enlarge] || 0
     extend = params[:extend] || 0
