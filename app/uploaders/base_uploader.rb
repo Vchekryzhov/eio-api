@@ -37,7 +37,7 @@ class BaseUploader < CarrierWave::Uploader::Base
     extend = params[:extend] || 0
     extension = params[:extansion] || "jpg"
     dpr = params[:dpr] || 1
-    quality = params[:q] || 80
+    quality = params[:q] || 90
 
     rs = ['rs', resize_type, width, height, enlarge, extend].compact.join(':')
     proxy_path = "#{rs}/dpr:#{dpr}/q:#{quality}/#{encoded_url}.#{extension}"
