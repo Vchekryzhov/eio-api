@@ -3,7 +3,8 @@ class Node < ApplicationRecord
 
     has_many :node2depart
     has_many :departments, through: :node2depart, source: :department
-    has_many :devices
+    has_many :device_nodes
+    has_many :devices, through: :device_nodes
 
     after_commit :set_image_color
 

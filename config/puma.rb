@@ -24,6 +24,10 @@ state_path app_root.join('tmp/pids/puma.state').to_s
 #
 workers 1#ENV.fetch("WEB_CONCURRENCY") { 1 }
 
+if ENV.fetch("RAILS_ENV") == 'development'
+  worker_timeout 360000
+end
+
 # Use the `preload_app!` method when specifying a `workers` number.
 # This directive tells Puma to first boot the application and load code
 # before forking the application. This takes advantage of Copy On Write
