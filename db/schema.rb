@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_03_190724) do
+ActiveRecord::Schema.define(version: 2020_12_03_191813) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -80,21 +80,21 @@ ActiveRecord::Schema.define(version: 2020_12_03_190724) do
     t.index ["parent_id"], name: "index_groups_on_parent_id"
   end
 
-  create_table "hub2configs", force: :cascade do |t|
-    t.bigint "hub_id"
-    t.jsonb "config"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["hub_id"], name: "index_hub2configs_on_hub_id"
-  end
-
   create_table "hub2devices", force: :cascade do |t|
-    t.bigint "hub_id"
+    t.string "hub_id"
     t.bigint "device_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["device_id"], name: "index_hub2devices_on_device_id"
     t.index ["hub_id"], name: "index_hub2devices_on_hub_id"
+  end
+
+  create_table "hub_configs", force: :cascade do |t|
+    t.string "hub_id"
+    t.jsonb "config"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["hub_id"], name: "index_hub_configs_on_hub_id"
   end
 
   create_table "hubs", id: :string, force: :cascade do |t|
