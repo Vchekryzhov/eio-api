@@ -37,7 +37,7 @@ Rails.application.configure do
 
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
-  ENV['ASSET_HOST'] = 'http://localhost:3001'
+  ENV['ASSET_HOST'] = 'http://api.eio.test'
   ENV['IMG_PROXY_HOST'] = 'http://localhost:8080'
   config.asset_host = ENV['ASSET_HOST']
   ENV['IMGPROXY_KEY'] = '352e227e24a7544fd1707f68151d695e767f5c7a6e15194981f2158496e471103558b67b0d657b9df2e5b57821a0d1f3a0dd65bdc3cfc4dfc4746d69aa6fc2c4'

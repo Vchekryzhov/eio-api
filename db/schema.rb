@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_03_191813) do
+ActiveRecord::Schema.define(version: 2020_12_03_194823) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -94,6 +94,7 @@ ActiveRecord::Schema.define(version: 2020_12_03_191813) do
     t.jsonb "config"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "config_hash_crc32"
     t.index ["hub_id"], name: "index_hub_configs_on_hub_id"
   end
 
@@ -104,6 +105,7 @@ ActiveRecord::Schema.define(version: 2020_12_03_191813) do
     t.string "v_ver"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.jsonb "device_list_available"
   end
 
   create_table "input_types", force: :cascade do |t|
