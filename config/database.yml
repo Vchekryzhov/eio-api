@@ -6,7 +6,7 @@ default: &default
   password: eio
   host: localhost
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-
+  schema_search_path: public, mdc
 development:
   <<: *default
   database: eio

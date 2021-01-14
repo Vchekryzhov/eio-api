@@ -10,16 +10,48 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_03_194823) do
+ActiveRecord::Schema.define(version: 2021_01_14_192559) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "action_text_rich_texts", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "body"
+    t.string "record_type", null: false
+    t.bigint "record_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["record_type", "record_id", "name"], name: "index_action_text_rich_texts_uniqueness", unique: true
+  end
+
+  create_table "active_storage_attachments", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "record_type", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
+    t.datetime "created_at", null: false
+    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
+    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+  end
+
+  create_table "active_storage_blobs", force: :cascade do |t|
+    t.string "key", null: false
+    t.string "filename", null: false
+    t.string "content_type"
+    t.text "metadata"
+    t.bigint "byte_size", null: false
+    t.string "checksum", null: false
+    t.datetime "created_at", null: false
+    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
   create_table "departments", force: :cascade do |t|
     t.string "name"
-    t.string "description"
+    t.text "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "image"
   end
 
   create_table "device_nodes", force: :cascade do |t|
@@ -52,6 +84,42 @@ ActiveRecord::Schema.define(version: 2020_12_03_194823) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["machine_id"], name: "index_documentations_on_machine_id"
+  end
+
+  create_table "draft2images", force: :cascade do |t|
+    t.bigint "draft_id"
+    t.bigint "image_id"
+    t.integer "rownum"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["draft_id"], name: "index_mdc.draft2images_on_draft_id"
+    t.index ["image_id"], name: "index_mdc.draft2images_on_image_id"
+  end
+
+  create_table "drafts", force: :cascade do |t|
+    t.string "name"
+    t.string "barcode"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "employees", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "middle_name"
+    t.string "position"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "executor_programs", force: :cascade do |t|
+    t.string "barcode_tech_process"
+    t.integer "rownum_tech_process"
+    t.bigint "employee_id"
+    t.float "actual_machine_time"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["employee_id"], name: "index_mdc.executor_programs_on_employee_id"
   end
 
   create_table "group_inputs", force: :cascade do |t|
@@ -94,11 +162,11 @@ ActiveRecord::Schema.define(version: 2020_12_03_194823) do
     t.jsonb "config"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "config_hash_crc32"
+    t.string "config_hash"
     t.index ["hub_id"], name: "index_hub_configs_on_hub_id"
   end
 
-  create_table "hubs", id: :string, force: :cascade do |t|
+  create_table "hubs", force: :cascade do |t|
     t.string "name"
     t.string "location"
     t.string "description"
@@ -106,6 +174,12 @@ ActiveRecord::Schema.define(version: 2020_12_03_194823) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.jsonb "device_list_available"
+  end
+
+  create_table "images", force: :cascade do |t|
+    t.string "path"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "input_types", force: :cascade do |t|
@@ -157,6 +231,15 @@ ActiveRecord::Schema.define(version: 2020_12_03_194823) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "machines", force: :cascade do |t|
+    t.string "title", null: false
+    t.string "model", null: false
+    t.string "machine_type", null: false
+    t.string "image"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "node2departs", force: :cascade do |t|
     t.bigint "node_id"
     t.bigint "department_id"
@@ -191,4 +274,52 @@ ActiveRecord::Schema.define(version: 2020_12_03_194823) do
     t.index ["machine_id"], name: "index_reviews_on_machine_id"
   end
 
+  create_table "tech_operation_types", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "tech_operations", force: :cascade do |t|
+    t.string "name"
+    t.bigint "tech_operation_type_id"
+    t.float "scheduled_machine_time"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["tech_operation_type_id"], name: "index_mdc.tech_operations_on_tech_operation_type_id"
+  end
+
+  create_table "tech_processes", force: :cascade do |t|
+    t.string "barcode"
+    t.bigint "tech_operation_id"
+    t.integer "rownum"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["tech_operation_id"], name: "index_mdc.tech_processes_on_tech_operation_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  create_table "versions", force: :cascade do |t|
+    t.string "item_type", null: false
+    t.bigint "item_id", null: false
+    t.string "event", null: false
+    t.string "whodunnit"
+    t.text "object"
+    t.datetime "created_at"
+    t.text "object_changes"
+    t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
+  end
+
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
 end
